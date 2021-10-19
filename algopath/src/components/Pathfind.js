@@ -27,8 +27,10 @@ function Pathfind() {
         createSpot(grid);
         setGrid(grid);
         addNeighbours(grid);
-
+        
+        //starting node
         const startNode = grid[NODE_START_ROW][NODE_START_COL];
+        //ending node
         const endNode = grid[NODE_END_ROW][NODE_END_COL];
         console.log("test");
         let path = Astar(startNode, endNode);
@@ -43,6 +45,7 @@ const createSpot = (grid) =>{
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < cols; j++){
             grid[i][j] = new Spot(i,j);
+         //   console.log("show me the constructor spot", new Spot(i,j));
         }
     }
 };
@@ -67,10 +70,15 @@ function Spot(i,j)
     this.addneighbours = function (grid){
         let i = this.x;
         let j = this.y;
-        if(i > 0) this.neighbours.push(grid[i - 1][j]);
+        if(i > 0) {this.neighbours.push(grid[i - 1][j]);
+        console.log("show me the row", rows-1, i-1);}
         if(i < rows - 1) this.neighbours.push(grid[i + 1][j]);
-        if(j > 0) this.neighbours.push(grid[i][j - 1]);
-        if(j < cols - 1 ) this.neighbours.push(grid[i][j + 1]);
+        if(j > 0){ this.neighbours.push(grid[i][j - 1]);
+        //console.log("show me the col", cols-1, j-1);
+        }
+        if(j < cols - 1 ) {this.neighbours.push(grid[i][j + 1]);
+        //console.log("show me the col",cols-1, j+1)
+        }
     }
 }
 

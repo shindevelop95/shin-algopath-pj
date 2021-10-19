@@ -1,12 +1,15 @@
 function Astar(startNode, endNode){
+   
     let openSet = [];
     let closeSet = [];  
     let path = [];
     let visitedNodes = [];
     openSet.push(startNode);
+  //  console.log("show me the startNode & endNode", startNode, endNode)
     while(openSet.length > 0){
         let leastIndex = 0;
         for(let i = 0; i < openSet.length; i++){
+           // console.log("Show me the length",openSet.length);
             if(openSet[i].f < openSet[leastIndex].f){
                 leastIndex = i;   
             }
@@ -15,6 +18,7 @@ function Astar(startNode, endNode){
         let current = openSet[leastIndex];
         visitedNodes.push(current)
         //console.log("show current",current);
+       // console.log("show visited nodes",visitedNodes);
         //console.log("show endNode",endNode);
         if(current === endNode){
             let temp = current;
@@ -23,12 +27,13 @@ function Astar(startNode, endNode){
                 path.push(temp.previous);
                 temp = temp.previous;
             }
-            console.log("shhow me the path",path);
+         //   console.log("shhow me the path",path);
             return {path, visitedNodes};
     
         }
 
         openSet = openSet.filter((elt) => elt !== current);
+       // console.log("show me the filtered openSet", openSet);
         closeSet.push(current);
 
         let neighbours = current.neighbours;
