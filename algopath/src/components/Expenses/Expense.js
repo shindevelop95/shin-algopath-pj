@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
+import ExpensesFilter from "./ExpenseFilter";
 function Expense() {
+  const [filteredYear, setFilteredYear] = useState("2020");
+  const expenseHandler = (ep) => {
+    setFilteredYear(ep);
+  };
   const expenseArr = [
     {
       id: 0,
@@ -29,15 +34,18 @@ function Expense() {
     },
   ];
   return (
-    <Card className="expense">
-      {expenseArr.map((expense) => (
-        <ExpenseItem
-          date={expense.date}
-          title={expense.title}
-          amount={expense.amount}
-        />
-      ))}
-    </Card>
+    <div>
+      <ExpensesFilter selected={filteredYear} expenseHandler={expenseHandler} />
+      <Card className="expense">
+        {expenseArr.map((expense) => (
+          <ExpenseItem
+            date={expense.date}
+            title={expense.title}
+            amount={expense.amount}
+          />
+        ))}
+      </Card>
+    </div>
   );
 }
 
